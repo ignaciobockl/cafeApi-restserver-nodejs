@@ -51,7 +51,7 @@ class Server {
         this.app.use(express.json());
 
         // public directory
-        this.app.use(express.static('public'));
+        this.app.use(express.static('src/public'));
 
         // morgan: records by console all requests made to the database.
         this.app.use(morgan('dev'));
