@@ -1,7 +1,11 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { validateFields } = require('../middlewares/validate-fields');
+// const { validateFields } = require('../middlewares/validate-fields');
+// const { validateJWT } = require('../middlewares/validate-JWT');
+// const { isAdminRole, hasRole } = require('../middlewares/validate-roles');
+const { validateFields, validateJWT, isAdminRole, hasRole } = require('../middlewares/index');
+
 const { isRoleValid, existEmail, existUserById, stateUser } = require('../helpers/database-validators');
 
 const {
@@ -42,6 +46,9 @@ router.route('/:id')
         validateFields
     ], updateUser)
     .delete([
+        validateJWT,
+        isAdminRole,
+        // hasRole('ADMIN_ROLE', 'VENTAS_ROLE'), /* it is the same middleware as isAdminRole with the difference that it can be customized. */
         check('id', 'It is not a valid mongo id.').isMongoId(),
         check('id').custom(existUserById),
         validateFields
