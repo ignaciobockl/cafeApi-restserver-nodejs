@@ -46,6 +46,7 @@ const deleteUser = async(req = request, res = response) => {
     // const user = await User.findByIdAndDelete(id);
 
     const user = await User.findById(id);
+    const authenticatedUser = req.user;
 
     if (user.state === true) {
 
@@ -54,7 +55,9 @@ const deleteUser = async(req = request, res = response) => {
 
         return res.status(200).json({
             ok: true,
-            msg: 'The user was successfully deleted.'
+            msg: 'The user was successfully deleted.',
+            deletedUser: user,
+            authenticatedUser: authenticatedUser
         });
 
     } else {
@@ -64,7 +67,9 @@ const deleteUser = async(req = request, res = response) => {
 
         return res.status(200).json({
             ok: true,
-            msg: 'The user was successfully restored.'
+            msg: 'The user was successfully restored.',
+            deletedUser: user,
+            authenticatedUser: authenticatedUser
         });
 
     }
