@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan')
 const { dbConnection } = require('../database/config');
 const { defaultRoles } = require('../helpers/defaultData');
 
@@ -51,6 +52,9 @@ class Server {
 
         // public directory
         this.app.use(express.static('public'));
+
+
+        this.app.use(morgan('dev'));
 
     }
 
