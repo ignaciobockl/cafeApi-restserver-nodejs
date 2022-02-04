@@ -53,7 +53,7 @@ class Server {
         // public directory
         this.app.use(express.static('public'));
 
-
+        // morgan: records by console all requests made to the database.
         this.app.use(morgan('dev'));
 
     }
