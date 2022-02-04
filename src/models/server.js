@@ -50,7 +50,7 @@ class Server {
         // Reading and parsing the body
         this.app.use(express.json());
 
-        // public directory
+        // public directory 
         this.app.use(express.static('src/public'));
 
         // morgan: records by console all requests made to the database.
