@@ -1,5 +1,4 @@
-const Role = require('../models/role.model');
-const User = require('../models/user.model');
+const { Category, Role, User } = require('../models');
 
 
 const isRoleValid = async(role = '') => {
@@ -26,22 +25,32 @@ const existEmail = async(email = '') => {
  */
 const existUserById = async(id) => {
     const exist = await User.findById(id);
-    if (!exist) {
-        throw new Error('There is no user with the entered id.');
-    }
+    if (!exist) { throw new Error('There is no user with the entered id.') }
 }
 
 const stateUser = async(id) => {
     const user = await User.findById(id);
-    if (user.state === false) {
-        throw new Error('The user is deleted.');
-    }
+    if (user.state === false) { throw new Error('The user is deleted.') }
 }
 
+/**
+ *  Category validators
+ */
+const existCategoryById = async(id) => {
+    const exist = await Category.findById(id);
+    if (!exist) { throw new Error('There is no category with the entered id.') }
+}
+
+const stateCategory = async(id) => {
+    const category = await Category.findById(id);
+    if (category.state === false) { throw new Error('The category is deleted.') }
+}
 
 module.exports = {
     isRoleValid,
     existEmail,
     existUserById,
-    stateUser
+    stateUser,
+    existCategoryById,
+    stateCategory
 }
