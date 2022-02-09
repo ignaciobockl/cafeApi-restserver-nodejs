@@ -1,4 +1,4 @@
-const { Category, Role, User } = require('../models');
+const { Category, Role, User, Product } = require('../models');
 
 
 const isRoleValid = async(role = '') => {
@@ -46,11 +46,27 @@ const stateCategory = async(id) => {
     if (category.state === false) { throw new Error('The category is deleted.') }
 }
 
+/**
+ *  Product validators
+ */
+const existProductById = async(id) => {
+    const exist = await Product.findById(id);
+    if (!exist) { throw new Error('There is no product with the entered id.') }
+}
+
+const stateProduct = async(id) => {
+    const product = await Product.findById(id);
+    if (product.state === false) { throw new Error('The product is deleted.') }
+}
+
+
 module.exports = {
-    isRoleValid,
     existEmail,
-    existUserById,
-    stateUser,
     existCategoryById,
-    stateCategory
+    existProductById,
+    existUserById,
+    isRoleValid,
+    stateCategory,
+    stateProduct,
+    stateUser
 }
