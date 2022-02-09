@@ -29,6 +29,7 @@ router.route('/:id')
     ], getCategoryById)
     .put([
         validateJWT,
+        check('id', 'It is not a valid mongo id.').isMongoId(),
         check('id').custom(existCategoryById),
         check('id').custom(stateCategory),
         check('name', 'The name is required.').not().isEmpty(),
