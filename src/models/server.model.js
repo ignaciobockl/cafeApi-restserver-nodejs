@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan')
+const fileUpload = require('express-fileupload');
 
 const { dbConnection } = require('../database/config');
 
@@ -20,6 +21,7 @@ class Server {
             categories: '/api/categories',
             products: '/api/products',
             search: '/api/search',
+            uploads: '/api/uploads',
             users: '/api/users'
         }
 
@@ -64,6 +66,13 @@ class Server {
         // morgan: records by console all requests made to the database.
         this.app.use(morgan('dev'));
 
+        // fileUpload
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true // This option is false by default, it allows you to automatically create the directory of the files to be uploaded locally.
+        }));
+
     }
 
     routes() {
@@ -72,6 +81,7 @@ class Server {
         this.app.use(this.paths.categories, require('../routes/categories.routes'));
         this.app.use(this.paths.products, require('../routes/products.routes'));
         this.app.use(this.paths.search, require('../routes/search.routes'));
+        this.app.use(this.paths.uploads, require('../routes/uploads.routes'));
         this.app.use(this.paths.users, require('../routes/users.routes'));
 
     }
