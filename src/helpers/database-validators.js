@@ -59,8 +59,19 @@ const stateProduct = async(id) => {
     if (product.state === false) { throw new Error('The product is deleted.') }
 }
 
+/**
+ *  Upload validators
+ */
+const allowedCollections = (collection = '', collections = []) => {
+    const included = collections.includes(collection);
+    if (!included) { throw new Error(`The collection ${ collection } is not allowed. Allowed collections: ${ collections }.`) }
+    return true;
+}
+
+
 
 module.exports = {
+    allowedCollections,
     existEmail,
     existCategoryById,
     existProductById,
