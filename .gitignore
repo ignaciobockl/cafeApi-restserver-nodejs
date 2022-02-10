@@ -6,7 +6,7 @@
 node_modules/
 
 # uploaded files
-uploads/*/**.jpg
-uploads/*/**.png
-uploads/*/**.gif
-uploads/*/**.jpeg
+src/uploads/*/**.jpg
+src/uploads/*/**.png
+src/uploads/*/**.gif
+src/uploads/*/**.jpeg
